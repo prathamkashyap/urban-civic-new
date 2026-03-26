@@ -799,7 +799,7 @@ export function ReportForm() {
     try {
       const reportId = crypto.randomUUID();
 
-      const priority = calculatePriority(category, true); // already added (good)
+      const priority = calculatePriority(category, true);
 
       await setDoc(doc(db, 'reports', reportId), {
         id: reportId,
@@ -867,10 +867,22 @@ export function ReportForm() {
                 { value: 'Streetlight', icon: <LampFloor />, label: 'Streetlight' },
               ].map(item => (
                 <div key={item.value}>
-                  <RadioGroupItem value={item.value} id={item.value} className="peer sr-only" />
+                  <RadioGroupItem
+                    value={item.value}
+                    id={item.value}
+                    className="peer hidden"
+                  />
+
                   <Label
                     htmlFor={item.value}
-                    className="flex flex-col items-center p-4 border rounded-md"
+                    className={`
+                      flex flex-col items-center p-4 border rounded-md cursor-pointer transition
+                      ${
+                        category === item.value
+                          ? "bg-blue-600 text-white border-blue-600"
+                          : "bg-transparent text-gray-300 border-gray-500 hover:bg-gray-700"
+                      }
+                    `}
                   >
                     {item.icon}
                     <span>{item.label}</span>
