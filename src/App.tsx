@@ -127,7 +127,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename="/">
           <div className="flex flex-col min-h-screen bg-muted/20">
             <main className="flex-grow">
               <AppRoutes />
